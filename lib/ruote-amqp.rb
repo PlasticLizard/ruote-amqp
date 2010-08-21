@@ -40,18 +40,18 @@ module RuoteAMQP
     def start!
       return if started?
 
-      mutex = Mutex.new
-      cv = ConditionVariable.new
+#      mutex = Mutex.new
+#      cv = ConditionVariable.new
 
 #      Thread.main[:ruote_amqp_connection] = Thread.new do
 #        Thread.abort_on_exception = true
         AMQP.start {
           started!
-          cv.signal
+#          cv.signal
         }
 #      end
 
-      mutex.synchronize { cv.wait(mutex) }
+#      mutex.synchronize { cv.wait(mutex) }
 
       MQ.prefetch(1)
 
